@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWidget</class>
+ <widget class="QWidget" name="MainWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>410</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Visual Sort</string>
+  </property>
+  <widget class="DrawWidget" name="wg_screen" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>390</width>
+     <height>220</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_sort">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>250</y>
+     <width>91</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Сортировать</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_shuffle">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>250</y>
+     <width>91</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Перемешать</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbx_sorts">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>250</y>
+     <width>121</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Пузырёк</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Вставками</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="lbl_el_time">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>250</y>
+     <width>54</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DrawWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">drawwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
