@@ -10,78 +10,73 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>410</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>410</width>
+    <height>16777215</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Visual Sort</string>
   </property>
-  <widget class="DrawWidget" name="wg_screen" native="true">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>390</width>
-     <height>220</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_sort">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>250</y>
-     <width>91</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Сортировать</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_shuffle">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>250</y>
-     <width>91</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Перемешать</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="cbx_sorts">
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>250</y>
-     <width>121</width>
-     <height>25</height>
-    </rect>
-   </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <property name="text">
-     <string>Пузырёк</string>
-    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
+     <item row="0" column="0" colspan="4">
+      <widget class="DrawWidget" name="wg_screen" native="true"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="btn_shuffle">
+       <property name="text">
+        <string>Перемешать</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QLabel" name="lbl_el_time">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QComboBox" name="cbx_sorts">
+       <item>
+        <property name="text">
+         <string>Пузырёк</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Вставками</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Выбором</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="btn_sort">
+       <property name="text">
+        <string>Сортировать</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item>
-    <property name="text">
-     <string>Вставками</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QLabel" name="lbl_el_time">
-   <property name="geometry">
-    <rect>
-     <x>340</x>
-     <y>250</y>
-     <width>54</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
+  </layout>
  </widget>
  <customwidgets>
   <customwidget>

@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     printf("\n");
 
     bubble_sort(sorted, len);
-    printf("Quick sort:\n");
+    printf("Bubble sort:\n");
     for (uint64_t i = 0; i < len; i++)
         printf("%i ", sorted[i]);
     printf("\n");

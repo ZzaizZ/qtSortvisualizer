@@ -2,6 +2,8 @@
 #include "sorts.cpp"
 #include "mainwidget.h"
 
+#include <QThread>
+
 #define UPDATE_INTERVAL_MS 5
 
 DrawWidget::DrawWidget(QWidget *parent) :
@@ -15,15 +17,22 @@ DrawWidget::DrawWidget(QWidget *parent) :
     sort_in_process = false;
     I = 0; J = 0;
     current_mode = 0;
+    sort_action = nullptr;
     connect(&tim, SIGNAL(timeout()), this, SLOT(draw()));
     connect(parent, SIGNAL(startSort(int)), this, SLOT(init(int)));
     tim.start(UPDATE_INTERVAL_MS);
 
 }
 
+DrawWidget::~DrawWidget()
+{
+    delete sort_action;
+}
+
 void DrawWidget::init(int _mode)
 {
     current_mode = _mode;
+    sort_action = nullptr;
     tim.start(UPDATE_INTERVAL_MS);
 }
 
@@ -38,30 +47,49 @@ void DrawWidget::shuffle()
 
 void DrawWidget::draw()
 {
+    current_number = NUMBERS_COUNT;
     switch (current_mode)
     {
     case 1:
     {
-        current_number = NUMBERS_COUNT;
-        if (!sorted && !sort_in_process)
+        if (sort_action == nullptr)
+            sort_action = new BubbleSort(ints, NUMBERS_COUNT);
+        if (!sort_action->sorted() && !sort_in_process)
         {
             sort_in_process = true;
-            I = 0; J = 0;
+            sort_action->init(ints, NUMBERS_COUNT);
             time_elapsed.restart();
         }
-    drawBubbleSort();
+    sort_action->step();
+    update();
     break;
     }
     case 2:
     {
-        current_number = NUMBERS_COUNT;
-        if (!sorted && !sort_in_process)
+        if (sort_action == nullptr)
+            sort_action = new InsertionSort(ints, NUMBERS_COUNT);
+        if (!sort_action->sorted() && !sort_in_process)
         {
             sort_in_process = true;
-            I = 0; J = I;
+            sort_action->init(ints, NUMBERS_COUNT);
             time_elapsed.restart();
         }
-        drawBubbleSort();
+        sort_action->step();
+        update();
+        break;
+    }
+    case 3:
+    {
+        if (sort_action == nullptr)
+            sort_action = new SelectionSort(ints, NUMBERS_COUNT);
+        if (!sort_action->sorted() && !sort_in_process)
+        {
+            sort_in_process = true;
+            sort_action->init(ints, NUMBERS_COUNT);
+            time_elapsed.restart();
+        }
+        sort_action->step();
+        update();
         break;
     }
     default:
@@ -78,49 +106,6 @@ void DrawWidget::drawAll()
     current_number++;
     if (current_number >= NUMBERS_COUNT)
         tim.stop();
-}
-
-void DrawWidget::drawBubbleSort()
-{
-    if (ints[J] > ints[J+1])
-    {
-        swaP(ints[J], ints[J+1]);
-        update();
-    }
-    J++;
-    if (J >= NUMBERS_COUNT -1 - I)
-    {
-        I++;
-        J = 0;
-    }
-    if (I >= NUMBERS_COUNT)
-    {
-        tim.stop();
-        emit sortIsDone(time_elapsed.elapsed());
-        sorted = true;
-        sort_in_process = false;
-    }
-}
-
-void DrawWidget::drawInsertionSort()
-{
-    swaP(ints[J-1], ints[J]);
-    current_number = NUMBERS_COUNT;
-    update();
-    if (J > 0 && ints[J-1] > ints[J])
-    {
-        I++;
-        J = I;
-    }
-
-    J--;
-    if (I >= NUMBERS_COUNT)
-    {
-        tim.stop();
-        emit sortIsDone(time_elapsed.elapsed());
-        sorted = true;
-        sort_in_process = false;
-    }
 }
 
 void DrawWidget::paintEvent(QPaintEvent *e)

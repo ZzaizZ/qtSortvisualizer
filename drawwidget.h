@@ -6,6 +6,8 @@
 #include <QTimer>
 #include <QTime>
 
+#include "sorting.h"
+
 #define NUMBERS_COUNT 39
 
 class DrawWidget : public QWidget
@@ -15,7 +17,7 @@ class DrawWidget : public QWidget
 
 public:
     DrawWidget(QWidget *parent = nullptr);
-    ~DrawWidget() {}
+    ~DrawWidget();
 
 protected:
     void paintEvent(QPaintEvent *e);
@@ -27,11 +29,10 @@ protected:
     int I, J;
     int current_mode;
     QTime time_elapsed;
+    Sorting *sort_action;
 
 
     void drawAll();
-    void drawBubbleSort();
-    void drawInsertionSort();
 protected slots:
     void init(int _mode);
 public slots:
@@ -40,6 +41,7 @@ public slots:
 
 signals:
     void sortIsDone(int ms_time);
+    void updateSort();
 
 };
 
