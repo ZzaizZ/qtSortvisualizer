@@ -70,9 +70,6 @@ void InsertionSort::step()
 {
     if (finished)
         return;
-//    for (uint64_t i = 1; i < len; i++)
-//        for (uint64_t j = i; j > 0 && array[j-1] > array[j]; j--)
-//            swaP(array[j-1], array[j]);
     if (I < length)
     {
         if (J > 0 && array[J-1] > array[J])
